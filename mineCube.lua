@@ -7,16 +7,16 @@ local dir = args[4]
 
 local turnDir1; local turnDir2;
 if (dir == "R" or dir == "r") then
-    turnDir1 = turtle.turnRight()
-    turnDir2 = turtle.turnLeft()
+    turnDir1 = turtle.turnRight
+    turnDir2 = turtle.turnLeft
 else
-    turnDir1 = turtle.turnLeft()
-    turnDir2 = turtle.turnRight()
+    turnDir1 = turtle.turnLeft
+    turnDir2 = turtle.turnRight
 end
 
 function main()
     for _ = 1, depth do
-        mineLayer(row, col)
+        mineLayer(col, row)
     end
 end
 
