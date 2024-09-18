@@ -1,3 +1,4 @@
+-- VERSION 1.1
 -- [uint col, uint row, uint depth, nil|"R"|"r" horzDir, nil|"U"|"u" vertDir]
 local args = { ... }
 local col = tonumber(args[1])
@@ -51,14 +52,16 @@ function progressBar(numer, denom, steps)
 end
 
 function logStats()
+  local stepCount = 20
   clearScreen()
-  print("on layer: " .. progressBar(log_layer / depth, 20))
-  print("on row: " .. progressBar(log_row / row, 20))
-  print("on col: " .. progressBar(log_col / col, 20))
+  print("on layer: " .. progressBar(log_layer, depth, stepCount))
+  print("on row:   " .. progressBar(log_row, row, stepCount))
+  print("on col:   " .. progressBar(log_col, col, stepCount))
   print("blocks mined: " .. log_blocksMined)
 end
 
 function digForward()
+  logStats()
   while (not turtle.forward()) do
     if (turtle.dig()) then
       log_blocksMined = log_blocksMined + 1
@@ -70,14 +73,15 @@ end
 function mineLayers(col, row, depth)
   for i = 1, depth do
     log_layer = i
+
     if (turtle.getFuelLevel() == 0) then
       local dotCount = 0
       while (not turtle.refuel()) do
         local dotStr = ""
-        clearScreen()
         for _ = 1, dotCount + 1 do
           dotstr = dotStr .. "."
         end
+        clearScreen()
         print("err: turtle ran out of fuel, waiting to be refilled" .. dotStr)
         dotCount = (dotCount + 1) % 3
       end
@@ -85,12 +89,10 @@ function mineLayers(col, row, depth)
       print("refuel success! continuing process")
     end
 
-    logStats()
-
     for j = 1, row do
       log_row = j
-      for _ = 1, col - 1 do
-        log_col = i
+      for k = 1, col - 1 do
+        log_col = k
         digForward()
       end
 

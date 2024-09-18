@@ -1,10 +1,17 @@
--- VERSION 1.0
+-- VERSION 1.1
+-- [string filename]
 local args = { ... }
-link = "https://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/"..args[1]..".lua"
-if http.checkURL(link) then
-  code = http.get(link)
-  codeText = code.readAll()
-  file = fs.open("git/"..args[1],"w")
+local filename = args[1]
+
+local url = "https://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/" ..
+    filename .. ".lua"
+local path = "git/" .. filename
+
+if http.checkURL(url) then
+  local handle = http.get(url)
+  local codeText = handle.readAll()
+  fs.delete(path)
+  local file = fs.open(path, "w")
   file.write(codeText)
   file.close()
 else
