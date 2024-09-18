@@ -35,6 +35,7 @@ function digForward()
   while (not turtle.forward()) do
     turtle.dig()
     blocksMined = blocksMined + 1
+    logstats()
   end
 end
 
@@ -76,7 +77,7 @@ function mineLayers(col, row, depth)
       clearLine = false;
     end
 
-    logStats("on layer", i)
+    logStats()
 
     for j = 1, row do
       for _ = 1, col - 1 do
