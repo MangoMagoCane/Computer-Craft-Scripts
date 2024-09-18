@@ -34,15 +34,15 @@ function digForward()
   while (not turtle.forward()) do
     turtle.dig()
     blocksMined = blocksMined + 1
-    if (not logStat("blocks mined", blocksMined)) then
-      clearLine = true
-    end
+    logStat("blocks mined", blocksMined)
   end
 end
 
 function logStat(statText, stat)
   if (clearLine) then
     term.clearLine()
+  else
+    clearLine = true
   end
   term.write(statText .. ": ")
   term.write(stat .. "\n")
