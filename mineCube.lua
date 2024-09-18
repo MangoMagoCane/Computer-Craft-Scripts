@@ -8,7 +8,8 @@ local vertDir = args[5]
 
 local turnDir1, turnDir2, vertDig, vertMove
 local clearLine = false
-local blocksMined = 0, i
+local blocksMined = 0
+local i = 0
 
 if (horzDir == "R" or horzDir == "r") then
   turnDir1 = turtle.turnRight
