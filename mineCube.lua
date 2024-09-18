@@ -45,8 +45,7 @@ function logStat(statText, stat)
   else
     clearLine = true
   end
-  term.write(statText .. ": ")
-  print(stat .. "\n")
+  print(statText .. ": " .. stat)
   return clearLine
 end
 
