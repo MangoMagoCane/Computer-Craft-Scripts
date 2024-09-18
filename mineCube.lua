@@ -8,7 +8,10 @@ local vertDir = args[5]
 
 local turnDir1, turnDir2, vertDig, vertMove
 local log_blocksMined = 0
+
 local log_layer = 1
+local log_col = 1
+local log_row = 1
 
 if (horzDir == "R" or horzDir == "r") then
   turnDir1 = turtle.turnRight
@@ -35,8 +38,8 @@ function clearScreen()
   term.setCursorPos(1, 1)
 end
 
-function progressBar(percent, steps)
-  local quantizedPercent = math.floor(percent / steps)
+function progressBar(numer, denom, steps)
+  local quantizedPercent = math.floor((numer / denom) * steps)
   local progressBar = ""
   for i = 1, quantizedPercent do
     progressBar = progressBar .. "#"
@@ -44,12 +47,14 @@ function progressBar(percent, steps)
   for i = 1, (steps - quantizedPercent) do
     progressBar = progressBar .. "-"
   end
-  return "[" .. progressBar .. "]"
+  return numer .. "/" .. denom .. " [" .. progressBar .. "]"
 end
 
 function logStats()
   clearScreen()
-  print("on layer: " .. log_layer .. "/" .. depth .. "" .. progressBar(log_layer / depth, 20))
+  print("on layer: " .. progressBar(log_layer / depth, 20))
+  print("on row: " .. progressBar(log_row / row, 20))
+  print("on col: " .. progressBar(log_col / col, 20))
   print("blocks mined: " .. log_blocksMined)
 end
 
@@ -83,14 +88,16 @@ function mineLayers(col, row, depth)
     logStats()
 
     for j = 1, row do
+      log_row = j
       for _ = 1, col - 1 do
+        log_col = i
         digForward()
       end
 
+      log_col = col
       if (j == row) then
         break
       end
-
       if (j % 2 == 1) then
         turnDir1()
         digForward()
