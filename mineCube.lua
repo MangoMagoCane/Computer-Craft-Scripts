@@ -58,12 +58,13 @@ function mineLayer(col, row)
 
     if (row % 2 == 1) then
         turnDir1()
+        turnDir1()
         for _ = 1, col do
             digForward()
         end
     end
     turnDir1()
-    for _ = 1, row - 1 do
+    for _ = 1, row do
         digForward()
     end
 
