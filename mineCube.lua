@@ -30,20 +30,22 @@ function main()
   return mineLayers(col, row, depth)
 end
 
-function logStats()
+function clearScreen()
   term.clear()
-  local layerPercentage = layer / depth
-  local quantizedPercent = math.ceil(layerPercentage * 100) % 10
+  term.setCursorPos(1, 1)
+end
+
+function logStats()
+  clearScreen()
+  local quantizedPercent = math.ceil((log_layer / depth) * 10)
   local progressBar = ""
-  for i=1,quantizedPercent do
-     progressBar = progressBar .. "#"
+  for i = 1, quantizedPercent do
+    progressBar = progressBar .. "#"
   end
-  for i=1,10-quantizedPercent do
-     progressBar = progressBar .. "-"
+  for i = 1, (10 - quantizedPercent) do
+    progressBar = progressBar .. "-"
   end
-    
-  end
-  print("on layer: " .. log_layer .. " [" .. progressBar.. "]")
+  print("on layer: " .. log_layer .. "/" .. depth .. " [" .. progressBar .. "]")
   print("blocks mined: " .. log_blocksMined)
 end
 
@@ -63,14 +65,14 @@ function mineLayers(col, row, depth)
       local dotCount = 0
       while (not turtle.refuel()) do
         local dotStr = ""
-        term.clear()
+        clearScreen()
         for _ = 1, dotCount + 1 do
           dotstr = dotStr .. "."
         end
         print("err: turtle ran out of fuel, waiting to be refilled" .. dotStr)
         dotCount = (dotCount + 1) % 3
       end
-      term.clear()
+      clearScreen()
       print("refuel success! continuing process")
     end
 
@@ -116,6 +118,7 @@ function mineLayers(col, row, depth)
     vertMove()
   end
 
+  print("Done!")
   return 0;
 end
 
