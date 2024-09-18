@@ -1,11 +1,11 @@
--- [uint col, uint row, uint depth, void|"R"|"r" dir]
+-- [uint col, uint row, uint depth, nil|"R"|"r" dir]
 local args = { ... }
 local col = tonumber(args[1])
 local row = tonumber(args[2])
 local depth = tonumber(args[3])
 local dir = args[4]
 
-local turnDir1; local turnDir2;
+local turnDir1, turnDir2;
 if (dir == "R" or dir == "r") then
     turnDir1 = turtle.turnRight
     turnDir2 = turtle.turnLeft
@@ -16,6 +16,7 @@ end
 
 function main()
     for _ = 1, depth do
+        turtle.refuel()
         mineLayer(col, row)
     end
 end
