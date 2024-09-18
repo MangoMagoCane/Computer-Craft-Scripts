@@ -31,14 +31,6 @@ function main()
   return mineLayers(col, row, depth)
 end
 
-function digForward()
-  while (not turtle.forward()) do
-    turtle.dig()
-    blocksMined = blocksMined + 1
-    logstats()
-  end
-end
-
 function logStat(statText, stat)
   if (clearLine) then
     term.clearLine()
@@ -53,6 +45,14 @@ function logStats()
   term.clear()
   logStat("on layer", i)
   logStat("blocks mined", blocksMined)
+end
+
+function digForward()
+  while (not turtle.forward()) do
+    turtle.dig()
+    blocksMined = blocksMined + 1
+    logstats()
+  end
 end
 
 function mineLayers(col, row, depth)
