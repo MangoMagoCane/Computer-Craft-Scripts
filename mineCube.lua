@@ -9,7 +9,7 @@ local vertDir = args[5]
 local turnDir1, turnDir2, vertDig, vertMove
 local clearLine = false
 local blocksMined = 0
-i = 0
+local layer = 1
 
 if (horzDir == "R" or horzDir == "r") then
   turnDir1 = turtle.turnRight
@@ -33,7 +33,7 @@ end
 
 function logStats()
   term.clear()
-  print("on layer: " .. i)
+  print("on layer: " .. layer)
   print("blocks mined: " .. blocksMined)
 end
 
@@ -47,6 +47,7 @@ end
 
 function mineLayers(col, row, depth)
   for i = 1, depth do
+    layer = i
     if (turtle.getFuelLevel() == 0) then
       local dotCount = 0
       term.write("err: turtle ran out of fuel, waiting to be refilled")
