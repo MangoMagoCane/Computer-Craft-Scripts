@@ -9,7 +9,7 @@ local vertDir = args[5]
 local turnDir1, turnDir2, vertDig, vertMove
 local clearLine = false
 local blocksMined = 0
-local i = 0
+i = 0
 
 if (horzDir == "R" or horzDir == "r") then
   turnDir1 = turtle.turnRight
@@ -31,27 +31,17 @@ function main()
   return mineLayers(col, row, depth)
 end
 
-function logStat(statText, stat)
-  if (clearLine) then
-    term.clearLine()
-  else
-    clearLine = true
-  end
-  print(statText .. ": " .. stat)
-  return clearLine
-end
-
 function logStats()
   term.clear()
-  logStat("on layer", i)
-  logStat("blocks mined", blocksMined)
+  print("on layer: " .. i)
+  print("blocks mined: " .. blocksMined)
 end
 
 function digForward()
   while (not turtle.forward()) do
     turtle.dig()
     blocksMined = blocksMined + 1
-    logstats()
+    logStats()
   end
 end
 
