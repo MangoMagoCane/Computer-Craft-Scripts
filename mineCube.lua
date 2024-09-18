@@ -8,69 +8,73 @@ local vertDir = args[5]
 
 local turnDir1, turnDir2, vertDig, vertMove;
 if (horzDir == "R" or horzDir == "r") then
-    turnDir1 = turtle.turnRight
-    turnDir2 = turtle.turnLeft
+  turnDir1 = turtle.turnRight
+  turnDir2 = turtle.turnLeft
 else
-    turnDir1 = turtle.turnLeft
-    turnDir2 = turtle.turnRight
+  turnDir1 = turtle.turnLeft
+  turnDir2 = turtle.turnRight
 end
 
 if (vertDir == "U" or vertDir == "u") then
-    vertDig = turtle.digUp
-    vertMove = turtle.up
+  vertDig = turtle.digUp
+  vertMove = turtle.up
 else
-    vertDig = turtle.digDown
-    vertMove = turtle.down
+  vertDig = turtle.digDown
+  vertMove = turtle.down
 end
 
 function main()
-    for _ = 1, depth do
-        turtle.refuel()
-        mineLayer(col, row)
-    end
+  mineLayer(col, row, depth)
 end
 
 function digForward()
-    while (not turtle.forward()) do
-        turtle.dig()
-    end
+  while (not turtle.forward()) do
+    turtle.dig()
+  end
 end
 
-function mineLayer(col, row)
-    for i = 1, row - 1 do
-        for _ = 1, col do
-            digForward()
-        end
-
-        if (i % 2 == 1) then
-            turnDir1()
-            digForward()
-            turnDir1()
-        else
-            turnDir2()
-            digForward()
-            turnDir2()
-        end
-    end
-    for _ = 1, col do
+function mineLayers(col, row, depth)
+  for i = 1, depth do
+    turtle.refuel()
+    for j = 1, row do
+      for _ = 1, col - 1 do
         digForward()
+      end
+
+      if (j == row) then
+        break
+      end
+
+      if (j % 2 == 1) then
+        turnDir1()
+        digForward()
+        turnDir1()
+      else
+        turnDir2()
+        digForward()
+        turnDir2()
+      end
     end
 
     if (row % 2 == 1) then
-        turnDir1()
-        turnDir1()
-        for _ = 1, col do
-            digForward()
-        end
+      turnDir1()
+      turnDir1()
+      for _ = 1, col - 1 do
+        digForward()
+      end
     end
     turnDir1()
-    for _ = 1, row do
-        digForward()
+    for _ = 1, row - 1 do
+      digForward()
     end
 
+    if (i == depth) then
+      break
+    end
     turnDir1()
     vertDig()
     vertMove()
+  end
 end
 
 main()
