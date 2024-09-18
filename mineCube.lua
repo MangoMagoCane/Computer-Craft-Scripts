@@ -35,17 +35,21 @@ function clearScreen()
   term.setCursorPos(1, 1)
 end
 
-function logStats()
-  clearScreen()
-  local quantizedPercent = math.ceil((log_layer / depth) * 10)
+function progressBar(percent, steps)
+  local quantizedPercent = math.floor(percent / steps)
   local progressBar = ""
   for i = 1, quantizedPercent do
     progressBar = progressBar .. "#"
   end
-  for i = 1, (10 - quantizedPercent) do
+  for i = 1, (steps - quantizedPercent) do
     progressBar = progressBar .. "-"
   end
-  print("on layer: " .. log_layer .. "/" .. depth .. " [" .. progressBar .. "]")
+  return "[" .. progressBar .. "]"
+end
+
+function logStats()
+  clearScreen()
+  print("on layer: " .. log_layer .. "/" .. depth .. "" .. progressBar(log_layer / depth, 20))
   print("blocks mined: " .. log_blocksMined)
 end
 
