@@ -63,7 +63,6 @@ function mineLayer(col, row)
             turtle.forward()
         end
     end
-    turnDir1()
     for _ = 1, row - 1 do
         turtle.forward()
     end
