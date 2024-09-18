@@ -56,13 +56,13 @@ function mineLayer(col, row)
         digForward()
     end
 
-    turnDir1()
     if (row % 2 == 1) then
         turnDir1()
         for _ = 1, col do
             turtle.forward()
         end
     end
+    turnDir1()
     for _ = 1, row - 1 do
         turtle.forward()
     end
