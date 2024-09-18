@@ -39,9 +39,10 @@ end
 
 function digForward()
   while (not turtle.forward()) do
-    turtle.dig()
-    blocksMined = blocksMined + 1
-    logStats()
+    if (turtle.dig()) then
+      blocksMined = blocksMined + 1
+      logStats()
+    end
   end
 end
 
