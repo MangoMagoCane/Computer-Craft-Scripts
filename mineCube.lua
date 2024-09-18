@@ -69,8 +69,8 @@ function mineLayer(col, row)
     end
 
     turnDir1()
-    turtle.vertDig()
-    turtle.vertMove()
+    vertDig()
+    vertMove()
 end
 
 main()
