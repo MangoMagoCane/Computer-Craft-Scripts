@@ -6,7 +6,10 @@ local depth = tonumber(args[3])
 local horzDir = args[4]
 local vertDir = args[5]
 
-local turnDir1, turnDir2, vertDig, vertMove;
+local turnDir1, turnDir2, vertDig, vertMove
+local clearLine = false
+local blocksMined = 0
+
 if (horzDir == "R" or horzDir == "r") then
   turnDir1 = turtle.turnRight
   turnDir2 = turtle.turnLeft
@@ -24,18 +27,54 @@ else
 end
 
 function main()
-  mineLayer(col, row, depth)
+  return mineLayers(col, row, depth)
 end
 
 function digForward()
   while (not turtle.forward()) do
     turtle.dig()
+    blocksMined = blocksMined + 1
+    if (not logStat("blocks mined", blocksMined)) then
+      clearLine = true
+    end
   end
+end
+
+function logStat(statText, stat)
+  if (clearLine) then
+    term.clearLine()
+  end
+  term.setTextColor(colors.white)
+  term.write(statText .. ": ")
+  term.setTextColor(colors.yellow)
+  term.write(stat .. "\n")
+  return clearLine
 end
 
 function mineLayers(col, row, depth)
   for i = 1, depth do
-    turtle.refuel()
+    if (turtle.getFuelLevel() == 0) then
+      local dotCount = 0
+      term.setTextColor(colors.red)
+      term.write("err: turtle ran out of fuel, waiting to be refilled")
+      local oldx, oldy = term.getCursorPos()
+      oldx = oldx + 1
+      while (not turtle.refuel()) do
+        term.setCursorPos(oldx, oldy)
+        term.clearLine()
+        for _ = 1, dotCount + 1 do
+          term.write(".")
+        end
+        dotCount = (dotCount + 1) % 3
+        term.write("\n")
+      end
+      term.setTextColor(colors.green)
+      term.write("refuel success! continuing process\n")
+      clearLine = false;
+    end
+
+    logStat("on layer", i)
+
     for j = 1, row do
       for _ = 1, col - 1 do
         digForward()
@@ -68,13 +107,15 @@ function mineLayers(col, row, depth)
       digForward()
     end
 
+    turnDir1()
     if (i == depth) then
       break
     end
-    turnDir1()
     vertDig()
     vertMove()
   end
+
+  return 0;
 end
 
 main()
