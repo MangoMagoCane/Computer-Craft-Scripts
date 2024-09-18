@@ -44,9 +44,7 @@ function logStat(statText, stat)
   if (clearLine) then
     term.clearLine()
   end
-  term.setTextColor(colors.white)
   term.write(statText .. ": ")
-  term.setTextColor(colors.yellow)
   term.write(stat .. "\n")
   return clearLine
 end
@@ -55,7 +53,6 @@ function mineLayers(col, row, depth)
   for i = 1, depth do
     if (turtle.getFuelLevel() == 0) then
       local dotCount = 0
-      term.setTextColor(colors.red)
       term.write("err: turtle ran out of fuel, waiting to be refilled")
       local oldx, oldy = term.getCursorPos()
       oldx = oldx + 1
