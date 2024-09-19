@@ -5,20 +5,22 @@ local method = args[1]
 local filename = args[2]
 
 local lookupTable = {
-  git = "http://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts/",
+  git = "http://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts",
   val = "Not keeping my ip in here!!!",
   -- evan = nil
 }
 
 local address = lookupTable[method]
 if (address == nil) then
-  print("invalid method: " .. method)
+  print("invalid method: " .. method ~= nil and method or "nil")
   return -1
 end
 
-local url = address .. "/" .. filename .. ".lua"
-if (not http.checkURL(url)) then
-  print("Invalid URL")
+local url = "http://" .. address .. filename .. ".lua"
+local success, message = http.checkURL(url)
+if (not success) then
+  print(url)
+  print("Invalid URL:", message)
   return -1
 end
 
