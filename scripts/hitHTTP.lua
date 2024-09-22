@@ -5,8 +5,8 @@ local method = args[1]
 local filename = args[2]
 
 local lookupTable = {
-  git = "raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts/",
-  val = "Not keeping my ip in here!!!",
+  git = "https://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts",
+  val = "http://127.0.0.1:8080",
   -- evan = nil
 }
 
@@ -16,7 +16,7 @@ if (address == nil) then
   return -1
 end
 
-local url = "http://" .. address .. filename .. ".lua"
+local url = address .. "/" .. filename .. ".lua"
 local success, message = http.checkURL(url)
 if (not success) then
   print(url)
