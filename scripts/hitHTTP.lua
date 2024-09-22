@@ -5,7 +5,7 @@ local method = args[1]
 local filename = args[2]
 
 local lookupTable = {
-  git = "http://raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts",
+  git = "raw.githubusercontent.com/MangoMagoCane/Computer-Craft-Scripts/refs/heads/main/scripts/",
   val = "Not keeping my ip in here!!!",
   -- evan = nil
 }
