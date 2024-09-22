@@ -48,16 +48,16 @@ function digForward()
 end
 
 function homeAndBack(curNum, stripDist)
-  for i, curNum*stripDist do
+  for i=1, curNum*stripDist do
     turtle.forward()
   end
-  for i,16 do
+  for i=1,16 do
     turtle.select(i)
     turtle.drop()
   end
   turtle.turnLeft()
   turtle.turnLeft() 
-  for i,curNum*stripDist do
+  for i=1,curNum*stripDist do
     turtle.forward()
   end
 
