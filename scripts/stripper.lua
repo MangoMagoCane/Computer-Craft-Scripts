@@ -18,7 +18,7 @@ function main(stripLen, stripNum, stripDist)
   for i = 1, stripNum do
     turtle.turnRight()
     for j = 1, stripLen do
-      digforward()
+      digForward()
     end
     turtle.turnLeft()
     turtle.turnLeft()
