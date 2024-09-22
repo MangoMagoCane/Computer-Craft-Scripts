@@ -1,4 +1,4 @@
--- VERSION 1.01
+-- VERSION 1.02
 -- AUTOMATED STRIP MINER
 
 local args = { ... }
@@ -65,3 +65,5 @@ if not (main(stripLen,stripNum,stripDist)) then
   print("Usage: stripper [Length of strips] [Number of strips] [Blocks between strips]")
   print("Please put a chest behind the turtle's start position")
   end
+end
+
