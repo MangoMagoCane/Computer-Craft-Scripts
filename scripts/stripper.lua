@@ -2,9 +2,9 @@
 -- AUTOMATED STRIP MINER
 
 local args = { ... }
-local stripLen = args[1]
-local stripNum = args[2]
-local stripDist = args[3]
+local stripLen = tonumber(args[1])
+local stripNum = tonumber(args[2])
+local stripDist = tonumber(args[3])
 
 function main(stripLen, stripNum, stripDist)
   if (stripDist < 0) then
