@@ -48,7 +48,7 @@ function digForward()
 end
 
 function homeAndBack(curNum, stripDist)
-  for i = 1, curNum * stripDist do
+  for i = 1, (curNum * stripDist) do
     turtle.forward()
   end
   for i = 1, 16 do
@@ -57,7 +57,7 @@ function homeAndBack(curNum, stripDist)
   end
   turtle.turnLeft()
   turtle.turnLeft()
-  for i = 1, curNum * stripDist do
+  for i = 1, (curNum * stripDist) do
     turtle.forward()
   end
 end
