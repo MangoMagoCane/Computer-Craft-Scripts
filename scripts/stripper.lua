@@ -1,4 +1,4 @@
--- VERSION 1.03
+-- VERSION 1.04
 -- AUTOMATED STRIP MINER
 
 local args = { ... }
@@ -27,7 +27,7 @@ function main(stripLen, stripNum, stripDist)
     end
     -- Dig left strip:
     for j = 1, stripLen do
-      turtle.digForward()
+      digForward()
     end
     turtle.turnLeft()
     turtle.turnLeft()
