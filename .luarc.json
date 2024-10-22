@@ -1,0 +1,15 @@
+{
+  "diagnostics.globals": [
+    "reload",
+    "http",
+    "fs",
+    "turtle",
+        "term",
+        "sleep",
+        "peripheral"
+  ],
+    "diagnostics.disable": [
+        "lowercase-global",
+        "redefined-local"
+    ]
+}

@@ -6,11 +6,12 @@ local printString = args[1]
 local wrap = args[2]
 
 if printer.newPage() then
-  if(printer.write(printString)) then
-    print("Successful write operation")
-  else print("Writing error!")
-  end
-else print("Print error!")
+	if printer.write(printString) then
+		print("Successful write operation")
+	else
+		print("Writing error!")
+	end
+else
+	print("Print error!")
 end
 printer.endPage()
-

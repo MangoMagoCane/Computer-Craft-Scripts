@@ -1,2 +1,3 @@
 # Computer-Craft-Scripts
-Computer Craft Minecraft Lua
+
+Computer Craft MineCraft Lua scripts oh yeah
